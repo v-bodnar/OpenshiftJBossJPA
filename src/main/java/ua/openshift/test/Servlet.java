@@ -76,7 +76,7 @@ public class Servlet extends HttpServlet {
             statement.setInt(1, key);
             ResultSet rs = statement.executeQuery();
             list = parseResultSet(rs);
-            usr = list.iterator().next();
+            usr = list.get(0);
         } catch (Exception e) {
             e.printStackTrace();
         }
