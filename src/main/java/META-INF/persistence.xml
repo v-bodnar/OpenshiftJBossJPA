@@ -3,6 +3,7 @@
   <persistence-unit name="DoctorVera" transaction-type="JTA">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <jta-data-source>java:jboss/datasources/MySQLDS</jta-data-source>
+    <class>ua.openshift.entities.User</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="none"/>
