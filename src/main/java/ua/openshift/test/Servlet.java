@@ -20,8 +20,8 @@ import ua.openshift.entities.User;
 public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	@PersistenceContext(unitName="DoctorVera")
-	private EntityManager em;
+	//@PersistenceContext(unitName="DoctorVera")
+	//private EntityManager em;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,9 +37,10 @@ public class Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter pw = response.getWriter();
 		pw.print("Servlet");
-		User user = em.find(User.class,1);
+		//User user = em.find(User.class,1);
 		
-		pw.print(user.getName());
+		//pw.print(user.getName());
+		pw.flush();
 	}
 
 	/**
