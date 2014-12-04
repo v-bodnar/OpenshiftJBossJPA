@@ -42,9 +42,10 @@ public class Servlet extends HttpServlet {
 	public static Connection getConnection() {
 		try {
 			InitialContext ic = new InitialContext();
-			Context initialContext = (Context) ic.lookup("java:comp/env");
-			DataSource datasource = (DataSource) initialContext.lookup("java:jboss/datasources/MySQLDS");
-			//DataSource datasource = (DataSource) ic.lookup("java:jboss/datasources/MySQLDS");
+			//Context initialContext = (Context) ic.lookup("java:comp/env");
+			//DataSource datasource = (DataSource) initialContext.lookup("java:jboss/datasources/MySQLDS");
+			Context initialContext = new InitialContext();
+		    DataSource datasource = (DataSource)initialContext.lookup("java:jboss/datasources/MySQLDS");
 			return datasource.getConnection();
 		} catch (Exception e) {
 			System.out.println(e.getLocalizedMessage());
