@@ -35,8 +35,10 @@ public class Servlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User user = em.find(User.class,1);
 		PrintWriter pw = response.getWriter();
+		pw.print("Servlet");
+		User user = em.find(User.class,1);
+		
 		pw.print(user.getName());
 	}
 
