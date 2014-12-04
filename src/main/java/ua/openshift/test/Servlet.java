@@ -69,16 +69,18 @@ public class Servlet extends HttpServlet {
 	
     public User findByPK(Integer key){
         List<User> list = null;
+        User usr = null;
         String sql = "SELECT * FROM  Users  WHERE id = ? ;";
-        try (PreparedStatement statement = getConnection().prepareStatement(sql)) {
+        try {
+        	PreparedStatement statement = getConnection().prepareStatement(sql);
             statement.setInt(1, key);
             ResultSet rs = statement.executeQuery();
             list = parseResultSet(rs);
+            usr = list.iterator().next();
         } catch (Exception e) {
             e.printStackTrace();;
         }
-        
-        return list.iterator().next();
+        return usr;
     }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
