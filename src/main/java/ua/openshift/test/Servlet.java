@@ -67,20 +67,17 @@ public class Servlet extends HttpServlet {
 		return result;
 	}
 	
-    public User findByPK(Integer key){
+    public List<User> findAll(){
         List<User> list = null;
-        User usr = null;
-        String sql = "SELECT * FROM  users  WHERE id = ? ;";
+        String sql = "SELECT * FROM  users;";
         try {
         	PreparedStatement statement = getConnection().prepareStatement(sql);
-            statement.setInt(1, key);
             ResultSet rs = statement.executeQuery();
             list = parseResultSet(rs);
-            usr = list.get(0);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return usr;
+        return list;
     }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -89,8 +86,8 @@ public class Servlet extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		pw.print("Servlet");
 		//User user = em.find(User.class,1);
-		User user = findByPK(1);
-		pw.print(user.getName());
+		List<User> users = findAll();
+		pw.print(users.toString());
 		//pw.print(user.getName());
 		pw.flush();
 	}
