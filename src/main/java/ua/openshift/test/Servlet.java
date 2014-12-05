@@ -27,8 +27,7 @@ import ua.openshift.entities.User;
 @WebServlet("/Servlet")
 public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	@PersistenceContext(unitName="DoctorVera")
+	@PersistenceContext(unitName = "jbossDB")
 	private EntityManager em;
 	
     /**
