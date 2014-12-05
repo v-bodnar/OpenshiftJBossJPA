@@ -51,6 +51,7 @@ public class Servlet extends HttpServlet {
 		//for(User usr : users) 
 		//	pw.print(usr.getName());
 		pw.print(user.getName());
+		em.close();
 		pw.flush();
 	}
 
