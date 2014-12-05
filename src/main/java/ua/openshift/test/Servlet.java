@@ -60,6 +60,7 @@ public class Servlet extends HttpServlet {
 				user.setId(rs.getInt("id"));
 				user.setLogin(rs.getString("login"));
 				user.setName(rs.getString("name"));
+				result.add(user);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();;
