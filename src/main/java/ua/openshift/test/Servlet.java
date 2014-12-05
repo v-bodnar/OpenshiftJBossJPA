@@ -27,6 +27,7 @@ import ua.openshift.entities.User;
 @WebServlet("/Servlet")
 public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
 	@PersistenceContext(unitName = "jbossDB")
 	private EntityManager em;
 	
@@ -46,9 +47,9 @@ public class Servlet extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		pw.print("Servlet");
 		User user = em.find(User.class,1);
-		List<User> users = findAll();
-		for(User usr : users) 
-			pw.print(usr.getName());
+		//List<User> users = findAll();
+		//for(User usr : users) 
+		//	pw.print(usr.getName());
 		pw.print(user.getName());
 		pw.flush();
 	}
@@ -59,7 +60,7 @@ public class Servlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
-	
+	/*
     public List<User> findAll(){
         List<User> list = null;
         String sql = "SELECT * FROM  users;";
@@ -99,7 +100,7 @@ public class Servlet extends HttpServlet {
 		}
 		return result;
 	}
-	
+	*/
 
 
 }
