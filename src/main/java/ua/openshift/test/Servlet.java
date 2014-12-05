@@ -10,6 +10,8 @@ import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,8 +28,8 @@ import ua.openshift.entities.User;
 public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	//@PersistenceContext(unitName = "jbossDB")
-	//private EntityManager em;
+	@PersistenceContext(unitName = "jbossDB")
+	private EntityManager em;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -44,11 +46,12 @@ public class Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter pw = response.getWriter();
 		pw.print("Servlet");
-		//User user = em.find(User.class,1);
-		List<User> users = findAll();
-			for(User usr : users) 
-			pw.print(usr.getName());
-		//pw.print(user.getName());
+		
+		//List<User> users = findAll();
+			//for(User usr : users) 
+			//pw.print(usr.getName());
+		User user = em.find(User.class,1);
+		pw.print(user.getName());
 		//em.close();
 		pw.flush();
 	}
