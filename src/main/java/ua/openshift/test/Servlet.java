@@ -57,7 +57,7 @@ public class Servlet extends HttpServlet {
 		try {
 			while (rs.next()) {
 				User user = new User();
-				user.setId(rs.getInt("Id"));
+				user.setId(rs.getInt("id"));
 				user.setLogin(rs.getString("login"));
 				user.setName(rs.getString("name"));
 			}
@@ -70,7 +70,7 @@ public class Servlet extends HttpServlet {
     public User findByPK(Integer key){
         List<User> list = null;
         User usr = null;
-        String sql = "SELECT * FROM  users  WHERE Id = ? ;";
+        String sql = "SELECT * FROM  users  WHERE id = ? ;";
         try {
         	PreparedStatement statement = getConnection().prepareStatement(sql);
             statement.setInt(1, key);
