@@ -10,8 +10,6 @@ import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,47 +37,7 @@ public class Servlet extends HttpServlet {
        
     }
     
-	public static Connection getConnection() {
-		try {
-			InitialContext ic = new InitialContext();
-			//Context initialContext = (Context) ic.lookup("java:comp/env");
-			//DataSource datasource = (DataSource) initialContext.lookup("java:jboss/datasources/MySQLDS");
-			Context initialContext = new InitialContext();
-		    DataSource datasource = (DataSource)initialContext.lookup("java:jboss/datasources/MySQLDS");
-			return datasource.getConnection();
-		} catch (Exception e) {
-			System.out.println(e.getLocalizedMessage());
-			return null;
-		}
-	}
-	protected List<User> parseResultSet(ResultSet rs){
-		LinkedList<User> result = new LinkedList<User>();
-		try {
-			while (rs.next()) {
-				User user = new User();
-				user.setId(rs.getInt("id"));
-				user.setLogin(rs.getString("login"));
-				user.setName(rs.getString("name"));
-				result.add(user);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();;
-		}
-		return result;
-	}
-	
-    public List<User> findAll(){
-        List<User> list = null;
-        String sql = "SELECT * FROM  users;";
-        try {
-        	PreparedStatement statement = getConnection().prepareStatement(sql);
-            ResultSet rs = statement.executeQuery();
-            list = parseResultSet(rs);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -99,5 +57,48 @@ public class Servlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
+	
+    public List<User> findAll(){
+        List<User> list = null;
+        String sql = "SELECT * FROM  users;";
+        try {
+        	PreparedStatement statement = getConnection().prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            list = parseResultSet(rs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
+	public static Connection getConnection() {
+		try {
+			Context initialContext = new InitialContext();
+		    DataSource datasource = (DataSource)initialContext.lookup("java:jboss/datasources/MySQLDS");
+			return datasource.getConnection();
+		} catch (Exception e) {
+			System.out.println(e.getLocalizedMessage());
+			return null;
+		}
+	}
+	
+	protected List<User> parseResultSet(ResultSet rs){
+		LinkedList<User> result = new LinkedList<User>();
+		try {
+			while (rs.next()) {
+				User user = new User();
+				user.setId(rs.getInt("id"));
+				user.setLogin(rs.getString("login"));
+				user.setName(rs.getString("name"));
+				System.out.println(user.getName());
+				result.add(user);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();;
+		}
+		return result;
+	}
+	
+
 
 }
