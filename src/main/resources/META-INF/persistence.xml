@@ -8,7 +8,7 @@
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="none"/>
    	  <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
-   	  <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform" />
+      <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform" />
     </properties>
   </persistence-unit>
 </persistence>
