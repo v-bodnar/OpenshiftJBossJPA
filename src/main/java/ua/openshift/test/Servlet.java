@@ -45,11 +45,11 @@ public class Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter pw = response.getWriter();
 		pw.print("Servlet");
-		//User user = em.find(User.class,1);
+		User user = em.find(User.class,1);
 		List<User> users = findAll();
 		for(User usr : users) 
 			pw.print(usr.getName());
-		//pw.print(user.getName());
+		pw.print(user.getName());
 		pw.flush();
 	}
 
