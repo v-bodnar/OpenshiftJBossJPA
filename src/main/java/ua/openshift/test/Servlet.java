@@ -10,6 +10,8 @@ import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,8 +28,8 @@ import ua.openshift.entities.User;
 public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	//@PersistenceContext(unitName="DoctorVera")
-	//private EntityManager em;
+	@PersistenceContext(unitName="DoctorVera")
+	private EntityManager em;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -46,7 +48,8 @@ public class Servlet extends HttpServlet {
 		pw.print("Servlet");
 		//User user = em.find(User.class,1);
 		List<User> users = findAll();
-		pw.print(users.toString());
+		for(User usr : users) 
+			pw.print(usr.getName());
 		//pw.print(user.getName());
 		pw.flush();
 	}
@@ -90,7 +93,6 @@ public class Servlet extends HttpServlet {
 				user.setId(rs.getInt("id"));
 				user.setLogin(rs.getString("login"));
 				user.setName(rs.getString("name"));
-				System.out.println(user.getName());
 				result.add(user);
 			}
 		} catch (Exception e) {
